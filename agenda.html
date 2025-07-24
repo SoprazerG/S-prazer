@@ -32,7 +32,7 @@
     table {
       margin: 0 auto;
       border-collapse: collapse;
-      width: 90%;
+      width: 95%;
     }
     th, td {
       border: 1px solid #FFD700;
@@ -44,6 +44,24 @@
     }
     td {
       background-color: #111111;
+    }
+    .controls {
+      margin: 20px;
+    }
+    .controls input, .controls button {
+      padding: 10px;
+      margin: 5px;
+      font-size: 1em;
+    }
+    .controls button {
+      background-color: #FF1493;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .controls button:hover {
+      background-color: #cc1177;
     }
   </style>
   <script>
@@ -57,24 +75,78 @@
         document.body.innerHTML = '<h2 style="color:#FF1493;">Acesso negado!</h2>';
       });
     }
+
+    function adicionarLinha() {
+      const nome = document.getElementById('nome').value;
+      const data = document.getElementById('data').value;
+      const horario = document.getElementById('horario').value;
+      const local = document.getElementById('local').value;
+
+      if (!nome || !data || !horario || !local) {
+        alert('Preencha todos os campos!');
+        return;
+      }
+
+      const tabela = document.getElementById('tabela-corpo');
+      const novaLinha = document.createElement('tr');
+
+      novaLinha.innerHTML = `
+        <td><input type="checkbox" /></td>
+        <td>${nome}</td>
+        <td>${data}</td>
+        <td>${horario}</td>
+        <td>${local}</td>
+      `;
+
+      tabela.appendChild(novaLinha);
+
+      // limpar campos
+      document.getElementById('nome').value = '';
+      document.getElementById('data').value = '';
+      document.getElementById('horario').value = '';
+      document.getElementById('local').value = '';
+    }
+
+    function removerSelecionados() {
+      const tabela = document.getElementById('tabela-corpo');
+      const linhas = tabela.querySelectorAll('tr');
+      linhas.forEach(linha => {
+        const checkbox = linha.querySelector('input[type="checkbox"]');
+        if (checkbox && checkbox.checked) {
+          tabela.removeChild(linha);
+        }
+      });
+    }
   </script>
 </head>
 <body>
   <h1 class="blink">O prazer é nosso segredo</h1>
+
   <div id="agenda">
+    <div class="controls">
+      <input type="text" id="nome" placeholder="Nome">
+      <input type="date" id="data">
+      <input type="time" id="horario">
+      <input type="text" id="local" placeholder="Local do encontro">
+      <button onclick="adicionarLinha()">+ Adicionar</button>
+      <button onclick="removerSelecionados()">Excluir selecionados</button>
+    </div>
+
     <table>
       <thead>
         <tr>
+          <th></th>
           <th>Nome</th>
           <th>Data</th>
           <th>Horário</th>
           <th>Local</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="tabela-corpo">
         <tr>
-          <td>Exemplo: Marina</td>
-          <td>01/08/2025</td>
+          <td><input type="checkbox" /></td>
+          <td>Marina</td>
+          <td>2025-08-01</td>
           <td>21:00</td>
           <td>Hotel Luxor</td>
         </tr>

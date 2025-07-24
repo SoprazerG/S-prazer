@@ -15,17 +15,17 @@
       text-align: center;
     }
     header {
-      padding: 30px 15px 10px;
+      padding: 40px 20px 20px;
     }
     h1 {
-      font-size: 2.2em;
+      font-size: 2.8em;
       color: #FFD700;
-      text-shadow: 0 0 10px #FFD700;
+      text-shadow: 0 0 12px #FFD700;
       margin-bottom: 10px;
     }
     h2.blink {
       animation: blinkColors 6s infinite;
-      font-size: 1.2em;
+      font-size: 1.6em;
       margin-bottom: 20px;
     }
     @keyframes blinkColors {
@@ -36,24 +36,24 @@
       100% { color: #000000; }
     }
     p {
-      font-size: 1em;
-      margin: 15px auto;
-      max-width: 90%;
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 600px;
       color: #CCCCCC;
     }
     form {
       background: #111;
       border: 2px solid #FFD700;
       border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
+      padding: 25px;
+      margin: 30px auto;
       width: 90%;
-      max-width: 400px;
+      max-width: 500px;
     }
     input, textarea {
       width: 95%;
-      padding: 10px;
-      margin: 8px 0;
+      padding: 14px;
+      margin: 10px 0;
       border: none;
       border-radius: 8px;
       background-color: #222;
@@ -63,8 +63,8 @@
     button {
       background-color: #FF1493;
       color: white;
-      padding: 12px 25px;
-      font-size: 1em;
+      padding: 15px 30px;
+      font-size: 1.1em;
       border: none;
       border-radius: 10px;
       cursor: pointer;
@@ -72,14 +72,30 @@
       width: 100%;
     }
     button:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
     }
     .agenda-link {
       display: block;
-      margin-top: 20px;
+      margin-top: 25px;
       color: #8A2BE2;
       text-decoration: underline;
-      font-size: 0.95em;
+      font-size: 1em;
+    }
+
+    /* Carrossel */
+    .carousel {
+      margin: 30px auto;
+      max-width: 95%;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+    .carousel img {
+      width: 100%;
+      display: none;
+      border: 3px solid #FFD700;
+    }
+    .carousel img.active {
+      display: block;
     }
   </style>
   <script>
@@ -91,6 +107,20 @@
       const texto = encodeURIComponent(`Olá, sou ${nome || 'anônima'} da região ${regiao}. Quero marcar: ${mensagem}`);
       window.open(`https://wa.me/5511980486652?text=${texto}`, '_blank');
     }
+
+    let currentSlide = 0;
+    function rotateBanner() {
+      const banners = document.querySelectorAll('.carousel img');
+      banners.forEach((img, i) => {
+        img.classList.toggle('active', i === currentSlide);
+      });
+      currentSlide = (currentSlide + 1) % banners.length;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      rotateBanner();
+      setInterval(rotateBanner, 4000);
+    });
   </script>
 </head>
 <body>
@@ -108,6 +138,12 @@
     <textarea id="mensagem" placeholder="O que deseja? (horário, preferências...)" rows="4"></textarea>
     <button type="submit">Quero marcar agora</button>
   </form>
+
+  <div class="carousel">
+    <img src="https://via.placeholder.com/800x200/FF1493/FFFFFF?text=Anuncie+seu+produto+com+discrição" class="active" alt="Banner 1">
+    <img src="https://via.placeholder.com/800x200/8A2BE2/FFFFFF?text=Espaço+para+seu+anúncio+exclusivo" alt="Banner 2">
+    <img src="https://via.placeholder.com/800x200/FFD700/000000?text=Seu+negócio+visível+no+prazer" alt="Banner 3">
+  </div>
 
   <a class="agenda-link" href="agenda.html">(acesso privado)</a>
 </body>

@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda Oculta - Só Prazer</title>
+  <style>
+    body {
+      background-color: #000000;
+      color: #FDF5E6;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+    }
+    h1.blink {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      animation: blinkColors 6s infinite;
+    }
+    @keyframes blinkColors {
+      0%   { color: #FF1493; }
+      25%  { color: #8A2BE2; }
+      50%  { color: #FFD700; }
+      75%  { color: #FDF5E6; }
+      100% { color: #000000; }
+    }
+    #agenda {
+      display: none;
+      margin-top: 30px;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 90%;
+    }
+    th, td {
+      border: 1px solid #FFD700;
+      padding: 10px;
+    }
+    th {
+      background-color: #8A2BE2;
+      color: #000000;
+    }
+    td {
+      background-color: #111111;
+    }
+  </style>
+  <script>
+    const senha = prompt('Digite sua senha de acesso:');
+    if (senha === 'S3nh@123') {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('agenda').style.display = 'block';
+      });
+    } else {
+      document.addEventListener('DOMContentLoaded', () => {
+        document.body.innerHTML = '<h2 style="color:#FF1493;">Acesso negado!</h2>';
+      });
+    }
+  </script>
+</head>
+<body>
+  <h1 class="blink">O prazer é nosso segredo</h1>
+  <div id="agenda">
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Data</th>
+          <th>Horário</th>
+          <th>Local</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Exemplo: Marina</td>
+          <td>01/08/2025</td>
+          <td>21:00</td>
+          <td>Hotel Luxor</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Só Prazer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #000000, #1a001a);
+      color: #FDF5E6;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+    header {
+      padding: 40px 20px 10px;
+    }
+    h1 {
+      font-size: 3em;
+      color: #FFD700;
+      text-shadow: 0 0 15px #FFD700;
+    }
+    h2.blink {
+      animation: blinkColors 6s infinite;
+      font-size: 1.5em;
+      margin-bottom: 30px;
+    }
+    @keyframes blinkColors {
+      0%   { color: #FF1493; }
+      25%  { color: #8A2BE2; }
+      50%  { color: #FFD700; }
+      75%  { color: #FDF5E6; }
+      100% { color: #000000; }
+    }
+    p {
+      font-size: 1.2em;
+      margin: 20px auto;
+      max-width: 600px;
+      color: #CCCCCC;
+    }
+    form {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 500px;
+    }
+    input, textarea {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 8px;
+      background-color: #222;
+      color: white;
+      font-size: 1em;
+    }
+    button {
+      background-color: #FF1493;
+      color: white;
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #FFD700;
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .agenda-link {
+      display: block;
+      margin-top: 30px;
+      color: #8A2BE2;
+      text-decoration: underline;
+    }
+  </style>
+  <script>
+    function enviarMensagemWhatsApp(event) {
+      event.preventDefault();
+      const nome = document.getElementById('nome').value;
+      const regiao = document.getElementById('regiao').value;
+      const mensagem = document.getElementById('mensagem').value;
+      const texto = encodeURIComponent(`Olá, sou ${nome || 'anônima'} da região ${regiao}. Quero marcar: ${mensagem}`);
+      window.open(`https://wa.me/5511980486652?text=${texto}`, '_blank');
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Só Prazer</h1>
+    <h2 class="blink">O prazer é nosso segredo</h2>
+  </header>
+
+  <p>Atendimento exclusivo para mulheres. Discrição absoluta. Prazer sem compromisso.<br>
+  Atendimento em hotel ou local seguro, com total respeito, conforto e descrição.</p>
+
+  <form onsubmit="enviarMensagemWhatsApp(event)">
+    <input type="text" id="nome" placeholder="Seu nome (opcional)">
+    <input type="text" id="regiao" placeholder="Bairro ou cidade">
+    <textarea id="mensagem" placeholder="O que deseja? (horário, preferências...)" rows="4"></textarea>
+    <button type="submit">Quero marcar agora</button>
+  </form>
+
+  <a class="agenda-link" href="agenda.html">(acesso privado)</a>
+</body>
+</html>
